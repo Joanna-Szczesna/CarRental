@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+            name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Car Rental demo</title>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
+<body class="container">
+
+<div class="row">
+    <div class="col-auto">
+
+        <h5 class="py-5">Car rental demo</h5>
+        <form class="col card p-3 mb-5" method="post" th:action="@{/}" th:object="${reservationInfo}">
+            <div class="form-group">
+                <label for="carType">Type</label>
+                <select class="form-control " id="carType" required th:field="*{carType}">
+                    <option hidden value="">Select a role</option>
+                    <option th:each="option : ${options}" th:value="${option}" th:text="${option}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="startDate">Start date</label>
+                <input class="form-control" id="startDate" placeholder="Enter start date" required
+                       th:field="*{startDate}"
+                       type="datetime-local"/>
+            </div>
+            <div class="form-group">
+                <label for="numDays">Numbers of days</label>
+                <input class="form-control" id="numDays" placeholder="How many days" required
+                       th:field="*{numDays}"
+                       type="number"/>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Create Reservation">
+        </form>
+
+        <div th:if="${message != null}" class="alert alert-success alert-dismissible fade show text-center message"
+             role="alert">
+            [[${message}]]
+        </div>
+        <div th:if="${errormessage != null}" class="alert alert-danger alert-dismissible fade show text-center message"
+             role="alert">
+            [[${errormessage}]]
+        </div>
+        <!--<div th:if="${success}" style="color:green;">-->
+        <!--<div th:object="${success}" >-->
+        <!--    <span th:text="${success.carId}">car iD</span>-->
+        <!--    <span th:text="${success.id}">reservation id</span>-->
+        <!--    <span th:text="${success.startDate}">start date</span>-->
+        <!--    <span th:text="${success.endDate}">end date</span>-->
+        <!--    <span> Great</span>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <div th:if="${#fields.hasErrors('reservationInfo.*')}" style="color:red">
+            <h3>Global errors:</h3>
+            <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error"/>
+        </div>
+
+    </div>
+    <div class="col-auto">
+        <h5 class="py-5">All reservations</h5>
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>Car type</th>
+                <th>Car Id</th>
+                <th>Reservation Id</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <span th:each="car : ${cars}">
+                <tr th:each="reservation : ${car.reservations}">
+                <td th:text="${car.carType}"></td>
+                <td th:text="${reservation.carId}"></td>
+                <td th:text="${reservation.id}"></td>
+                <td th:text="${reservation.startDate}"></td>
+                <td th:text="${reservation.endDate}"></td>
+                </tr>
+                </span>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
