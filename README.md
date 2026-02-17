@@ -1,10 +1,10 @@
 # Car rental app
 
+<img src="/images/res.png" width="720" height="512">
 
 
 ## Error Handling
 
-<img src="/images/res.png" width="720" height="512">
 
 <img src="/images/error.png" width="550" height="870">
 
@@ -19,4 +19,5 @@ http://localhost:8080/
 
 ## DB
 http://localhost:8080/h2-console
+
 
