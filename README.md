@@ -5,8 +5,14 @@
 
 ## Error Handling
 
+### Booking failed. No car available at that time
+
+<img src="/images/no.png" width="720" height="512">
+
+### Negative days  
 
 <img src="/images/error.png" width="550" height="870">
+
 
 ## Calendar
 
